@@ -10,6 +10,7 @@ import timezone from 'dayjs/plugin/timezone.js'
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 import { setUpRoute } from "./libs";
+import { checkDbConnection } from "./libs/database";
 
 dayjs.extend(localizedFormat)
 dayjs.extend(utc)
@@ -30,8 +31,10 @@ export const serverSetup = async () => {
     app.use(timeout("60s"));
     app.use((req, res, next) => { if (!req.timedout) next() });
 
+    await checkDbConnection()
+
     app.get("/healthz", (req, res) => res.send("Healthz Check"))
-    app.get("/", (req, res) => res.send("Home API"))
+    app.get("/", (req, res) => res.send("Home API V1"))
 
     setUpRoute(app)
 
