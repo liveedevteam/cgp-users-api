@@ -1,5 +1,11 @@
 import createUser from './createUser';
+import updateUserById from './updateUserById';
+import getUserById from './getUserById';
+import getUserList from './getUserList';
 
 module.exports = {
-    createUser
+    createUser,
+    updateUserById,
+    getUserById,
+    getUserList
 }
