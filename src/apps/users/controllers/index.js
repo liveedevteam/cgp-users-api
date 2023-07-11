@@ -1,3 +1,5 @@
-module.exports = {
+import createUser from './createUser';
 
+module.exports = {
+    createUser
 }
