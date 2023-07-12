@@ -5,11 +5,13 @@ import {
     createUser,
     updateUserById,
     getUserById,
-    getUserList
+    getUserList,
+    searchUserByName
 } from './controllers';
 
 export function setup(router) {
     router
+        .get(`/search`, verifyTokenGateway, searchUserByName)
         .get(`/:id`, verifyTokenGateway, getUserById)
         .get(`/`, verifyTokenGateway, getUserList)
         .post(`/`, verifyTokenGateway, createUser)

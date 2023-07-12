@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
 
     if (!page) page = 1
     if (!size) size = 10
-    console.log("Hi")
+   
     const getQuery = `SELECT * FROM cgp.users LIMIT $2 OFFSET(($1-1)*$2)`
     try {
         conn = await db.connect()

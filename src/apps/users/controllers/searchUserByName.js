@@ -7,36 +7,37 @@ module.exports = async (req, res) => {
         results: null
     }
     const {
-        id
-    } = req.params
+        name
+    } = req.query
     let conn
 
-    if (!id) {
+    if (!name) {
         resObj.status = 400
-        resObj.msg = `ID was wrong`
+        resObj.msg = `Please enter name`
         resObj.results = {}
-    }
-    else if (id) {
-        const getQuery = `SELECT * FROM cgp.users WHERE id=$1`
+    } else if (name) {
+        const getQuery = `SELECT * FROM cgp.users WHERE name ILIKE $1`;
         try {
             conn = await db.connect()
-            const user = await conn.query(getQuery, [id])
+            const user = await db.query(getQuery, ['%' + name + '%']);
+
             if (user.rowCount > 0) {
                 resObj.status = 200
-                resObj.msg = `Get user data id=${id} success`
-                resObj.results = user.rows[0]
+                resObj.msg = `Get user data by name=${name} success`
+                resObj.results = user.rows
             } else {
                 resObj.status = 404
-                resObj.msg = `Get user data id=${id} not found`
+                resObj.msg = `Get user data by name=${name} not found`
                 resObj.results = {}
             }
         } catch (error) {
-            resObj.msg = `Get user data by id fail`
+            console.error(error)
+            resObj.msg = `Get user data by name=${name} fail`
             resObj.results = error
         } finally {
             conn.release()
         }
-    }
 
-    res.status(resObj.status).json(resObj)
+        res.status(resObj.status).json(resObj)
+    }
 }

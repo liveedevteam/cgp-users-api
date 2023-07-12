@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   api:
-    build: /docker/api/.
+    build: ./docker/api/
     restart: on-failure
     ports:
       - 3001:3001
@@ -17,30 +17,31 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    environment:
-      - DATABASE_URL=postgresql://localhost:5432
+    links:
+      - db
     volumes:
       - ./:/app
     working_dir: /app
     command: npm start
 
   db:
-    build:
-      context: /docker/db/.
+    image: postgres:15.3
     restart: always
     environment:
-      POSTGRES_USER: username
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: cgp_db
+      POSTGRES_USER: postAdmUsr2023
+      POSTGRES_PASSWORD: p@ssWordPostG2ade
+      POSTGRES_DB: postgres
     volumes:
-      - db-data:/var/lib/postgresql/data
+      - db:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/create_tables.sql
     ports:
       - 5432:5432
     healthcheck:
-      test: [ "CMD", "pg_isready", "-U", "username" ]
+      test: [ "CMD", "pg_isready", "-U", "postAdmUsr2023" ]
       interval: 30s
       timeout: 10s
       retries: 3
 
 volumes:
-  db-data:
+  db:
+    driver: local

@@ -30,5 +30,5 @@ module.exports = async (req, res) => {
         }
     }
 
-    res.status(resObj.status).json(resObj)
+    return res.status(resObj.status).json(resObj)
 }
