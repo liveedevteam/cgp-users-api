@@ -11,6 +11,7 @@ module.exports = async (req, res, next) => {
         resObj.status = 401
         resObj.msg = `Access token not found`
         resObj.results = {}
+        return res.status(resObj.status).json(resObj)
     } else if (accessToken) {
         try {
             const token = accessToken.split("Bearer ")[1]
@@ -22,8 +23,8 @@ module.exports = async (req, res, next) => {
             resObj.status = 401
             resObj.msg = `Verify token fail`
             resObj.results = {}
+
+            return res.status(resObj.status).json(resObj)
         }
     }
-
-    res.status(resObj.status).json(resObj)
 }

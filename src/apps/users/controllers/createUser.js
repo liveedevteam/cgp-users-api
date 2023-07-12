@@ -18,8 +18,9 @@ module.exports = async (req, res) => {
     }
     else if (email && name) {
         const insertQuery = `INSERT INTO cgp.users(email, name) VALUES ($1, $2)`
+        let conn
         try {
-            const conn = await db.connect()
+            conn = await db.connect()
             const newUser = await conn.query(insertQuery, [email, name])
             resObj.status = 201
             resObj.msg = `Create user success`
@@ -29,6 +30,8 @@ module.exports = async (req, res) => {
         } catch (error) {
             resObj.msg = `Create user fail`
             resObj.results = error
+        } finally {
+            conn.release()
         }
     }
 

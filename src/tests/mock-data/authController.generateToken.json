@@ -1,0 +1,7 @@
+{
+    "status": 200,
+    "msg": "Generate token success",
+    "results": {
+        "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YWZlNjI5N2I1ODcxMzk4MGNlOGZhNTk1ZmU0Yzk5MDUzNjJlYTEzMTdmNmIzNGRiNjlhMmY4ZmRjOWQwMmQxfHx8MjAyMy0wNy0xMlQwMzowNjozNSIsImlhdCI6MTY4OTEwNTk5NSwiZXhwIjoxNjg5MTQ5MTk1fQ.1INALGe6OzA2_xxROIPch_ifgBmyYXKRJR0qn3wJcRg"
+    }
+}

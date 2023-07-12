@@ -9,7 +9,7 @@ import utc from 'dayjs/plugin/utc.js'
 import timezone from 'dayjs/plugin/timezone.js'
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
-import { setUpRoute } from "./libs";
+import setUpRoute from "./libs/setUpRoute";
 import { checkDbConnection } from "./libs/database";
 
 dayjs.extend(localizedFormat)
@@ -39,4 +39,6 @@ export const serverSetup = async () => {
     setUpRoute(app)
 
     app.listen(PORT, () => console.log(`App Listening PORT: ${PORT}`))
+
+    return app
 }

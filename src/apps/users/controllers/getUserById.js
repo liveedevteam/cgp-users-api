@@ -9,6 +9,7 @@ module.exports = async (req, res) => {
     const {
         id
     } = req.params
+    let conn
 
     if (!id) {
         resObj.status = 400
@@ -18,7 +19,7 @@ module.exports = async (req, res) => {
     else if (id) {
         const getQuery = `SELECT * FROM cgp.users WHERE id=$1`
         try {
-            const conn = await db.connect()
+            conn = await db.connect()
             const user = await conn.query(getQuery, [id])
             resObj.status = 200
             resObj.msg = `Get user data id=${id} success`
@@ -26,6 +27,8 @@ module.exports = async (req, res) => {
         } catch (error) {
             resObj.msg = `Get user data by id fail`
             resObj.results = error
+        } finally {
+            conn.release()
         }
     }
 

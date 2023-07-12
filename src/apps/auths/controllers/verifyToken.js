@@ -28,7 +28,7 @@ module.exports = async (req, res) => {
             }
         } catch (error) {
             console.error(`Verify fail`)
-            console.error(error)
+            // console.error(error)
             resObj.status = 401
             resObj.msg = `Verify token fail`
             resObj.results = {}

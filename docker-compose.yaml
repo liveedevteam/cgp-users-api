@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   api:
-    build: .
+    build: /docker/api/.
     restart: on-failure
     ports:
       - 3001:3001
@@ -25,11 +25,13 @@ services:
     command: npm start
 
   db:
-    image: postgres:latest
+    build:
+      context: /docker/db/.
     restart: always
     environment:
       POSTGRES_USER: username
       POSTGRES_PASSWORD: password
+      POSTGRES_DB: cgp_db
     volumes:
       - db-data:/var/lib/postgresql/data
     ports:
