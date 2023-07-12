@@ -20,6 +20,7 @@
 - index.js = index of express js split of server to add the next server such as realtime (socket.io)
 - server.js = express configuration and middlewares
 - docker-compose.yamal
+- .env
 ### Pros
 1. Modularity: The clear separation of concerns, with different directories for different parts of the application, helps maintain modularity. It will make your application easier to understand, maintain, and extend.
 2. Docker Integration: With Docker files included in the structure, it's easy to containerize your application. This can simplify deployment, scaling, and testing, and ensure that the application works consistently across different environments.
